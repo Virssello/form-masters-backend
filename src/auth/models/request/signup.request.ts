@@ -1,6 +1,11 @@
 import { IsNotEmpty, Matches, MaxLength, MinLength } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class SignupRequest {
+  @ApiProperty({
+    description: 'Username - max length 20 letters',
+    example: 'username',
+  })
   @IsNotEmpty()
   // alphanumeric characters and - are valid
   // you can change this as you like
@@ -8,6 +13,10 @@ export class SignupRequest {
   @MaxLength(20)
   username: string;
 
+  @ApiProperty({
+    description: 'Password - min length 8 letters',
+    example: 'password',
+  })
   @IsNotEmpty()
   @MinLength(8)
   password: string;
