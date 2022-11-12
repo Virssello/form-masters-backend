@@ -1,30 +1,26 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
-import { JwtAuthGuard } from './auth/jwt-auth-guard';
-import { ReceipesModule } from './receipes/receipes.module';
-import { WorkoutsModule } from './workouts/workouts.module';
-import { ProductsModule } from './products/products.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { ThrottlerBehindProxyGuard } from './common/guards/throttler-behind-proxy.guard';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 50,
+    }),
+    UserModule,
     AuthModule,
-    UsersModule,
-    AuthModule,
-    ReceipesModule,
-    WorkoutsModule,
-    ProductsModule,
   ],
-  controllers: [AppController],
   providers: [
-    AppService,
     {
       provide: APP_GUARD,
-      useClass: JwtAuthGuard,
+      useClass: ThrottlerBehindProxyGuard,
     },
   ],
+  controllers: [AppController],
 })
 export class AppModule {}

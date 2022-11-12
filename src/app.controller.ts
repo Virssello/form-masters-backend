@@ -1,14 +1,11 @@
-import { Controller, Get } from '@nestjs/common';
-import { AuthService } from './auth/auth.service';
-import { Public } from './auth/Public';
+import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller()
+@ApiTags('health-check')
+@Controller('')
 export class AppController {
-  constructor(private authService: AuthService) {}
-
-  @Public()
   @Get()
-  doGet() {
-    return 'Hello world';
-  }
+  @HttpCode(HttpStatus.OK)
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  healthCheck(): void {}
 }

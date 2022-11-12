@@ -1,29 +1,42 @@
-import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { UsersService } from 'src/users/users.service';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
-import { LocalAuthGuard } from './local-auth-guard';
-import { Public } from './Public';
+import { User } from '../user/user.decorator';
+import { LoginRequest, LoginResponse, SignupRequest } from './models';
+import { AuthUser } from './auth-user';
+import { UserResponse } from '../user/models/user.response';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly usersService: UsersService,
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
-  @Public()
-  @Post('register')
-  register(@Body() createUserDto: CreateUserDto, @Request() req) {
-    this.usersService.create(createUserDto);
-
-    return 'User created';
+  @Post('signup')
+  @HttpCode(HttpStatus.CREATED)
+  async signup(@Body() signupRequest: SignupRequest): Promise<void> {
+    await this.authService.signup(signupRequest);
   }
 
-  @UseGuards(LocalAuthGuard)
-  @Public()
   @Post('login')
-  async login(@Request() req) {
-    return this.authService.login(req.user);
+  @HttpCode(HttpStatus.OK)
+  async login(@Body() loginRequest: LoginRequest): Promise<LoginResponse> {
+    return new LoginResponse(await this.authService.login(loginRequest));
+  }
+
+  @ApiBearerAuth()
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard())
+  async getUserWithToken(@User() user: AuthUser): Promise<UserResponse> {
+    return UserResponse.fromUserEntity(user);
   }
 }

@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  username String @unique
+  password String
+  meals Meal[]
+  measurements Measurement[]
+}
+
+model Measurement {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references:[id])
+  userId Int
+  weight Int
+  neck Int
+  chest Int
+  stomach Int
+  hips Int
+  biceps Int
+  calf Int
+  waist Int
+}
+
+model Meal {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references:[id])
+  userId Int
+  product Product[]
+  name String
+  calories Int
+  protein Int
+  carbohydrate Int
+  fat Int
+}
+
+model Product {
+  id Int @id @default(autoincrement())
+  meal Meal @relation(fields: [mealId], references:[id])
+  mealId Int
+  name String
+  calories Int
+  protein Int
+  carbohydrate Int
+  fat Int
+}
+
+model Receipe {
+  id Int @id @default(autoincrement())
+  name String @unique
+  type String
+  calories Int
+  photo String
+  ingredients String
+  description String
+}
+
+model Workout {
+  id Int @id @default(autoincrement())
+  name String
+  excercises Excercises[]
+  series String
+  reps String
+}
+
+enum Excercises {
+  EMPTY
+  SQUAT
+  DUMBBELL_PRESS
+  DEADLIFT
+}
