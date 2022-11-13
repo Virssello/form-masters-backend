@@ -8,7 +8,7 @@ export class MeasurementsService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getOneMeasurement(id: number): Promise<Measurement> {
-    console.log('GET user with id ' + id);
+    console.log('GET measurement successful');
     return this.prismaService.measurement.findUnique({ where: { id: id } });
   }
 
@@ -19,11 +19,7 @@ export class MeasurementsService {
       createMeasurementRequest;
     const measurement = this.prismaService.measurement.create({
       data: {
-        user: {
-          connect: {
-            id: userId,
-          },
-        },
+        userId: userId,
         weight,
         neck,
         chest,
@@ -34,7 +30,7 @@ export class MeasurementsService {
         waist,
       },
     });
-    console.log('POST measurement with data: ' + measurement);
+    console.log('POST measurement successful');
     return measurement;
   }
 }

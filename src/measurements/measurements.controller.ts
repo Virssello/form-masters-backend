@@ -1,6 +1,10 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { MeasurementsService } from './measurements.service';
-import { ApiBadRequestResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiCreatedResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CreateMeasurementRequest } from './request/create-measurement.request';
 
 @ApiTags('measurements')
@@ -14,7 +18,7 @@ export class MeasurementsController {
     return this.measurementsService.getOneMeasurement(+id);
   }
 
-  @ApiOkResponse({
+  @ApiCreatedResponse({
     description: 'Measurement has been created',
   })
   @ApiBadRequestResponse({
