@@ -7,7 +7,6 @@ import { ThrottlerBehindProxyGuard } from './common/guards/throttler-behind-prox
 import { AppController } from './app.controller';
 import { RecipesModule } from './recipe/recipes.module';
 import { MeasurementsModule } from './measurements/measurements.module';
-import { ProductsModule } from './products/products.module';
 import { ProductUsersModule } from './product-users/product-users.module';
 
 @Module({
@@ -20,7 +19,6 @@ import { ProductUsersModule } from './product-users/product-users.module';
     UserModule,
     RecipesModule,
     MeasurementsModule,
-    ProductsModule,
     ProductUsersModule,
   ],
   providers: [
