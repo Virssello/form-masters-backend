@@ -16,10 +16,10 @@ import {
 } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
-import { User } from '../user/user.decorator';
+import { User } from './user/user.decorator';
 import { LoginRequest, LoginResponse, SignupRequest } from './models';
-import { AuthUser } from './auth-user';
-import { UserResponse } from '../user/models/user.response';
+import { AuthUser } from './user/auth-user';
+import { UserResponse } from './user/models/response/user.response';
 
 @ApiTags('auth')
 @Controller('auth')

@@ -9,20 +9,20 @@ import { Prisma } from '@prisma/client';
 import { UserService } from '../user/user.service';
 import { JwtPayload } from './jwt-payload';
 import { LoginRequest, SignupRequest } from './models';
-import { AuthUser } from './auth-user';
+import { AuthUser } from './user/auth-user';
 import { PrismaService } from '../common/services/prisma/prisma.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly prisma: PrismaService,
+    private readonly prismaService: PrismaService,
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
 
   async signup(signupRequest: SignupRequest): Promise<void> {
     try {
-      await this.prisma.user.create({
+      await this.prismaService.user.create({
         data: {
           username: signupRequest.username.toLowerCase(),
           password: await bcrypt.hash(signupRequest.password, 10),
@@ -39,12 +39,12 @@ export class AuthService {
     }
   }
 
-  async validateUser(payload: JwtPayload): Promise<AuthUser> {
-    const user = await this.prisma.user.findUnique({
-      where: { id: payload.id },
+  async validateUser(jwtPayload: JwtPayload): Promise<AuthUser> {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: jwtPayload.id },
     });
 
-    if (user !== null && user.username === payload.username) {
+    if (user !== null && user.username === jwtPayload.username) {
       return user;
     }
     throw new UnauthorizedException();
@@ -52,7 +52,7 @@ export class AuthService {
 
   async login(loginRequest: LoginRequest): Promise<string> {
     const normalizedIdentifier = loginRequest.username.toLowerCase();
-    const user = await this.prisma.user.findFirst({
+    const user = await this.prismaService.user.findFirst({
       where: {
         OR: [
           {
@@ -74,11 +74,11 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
-    const payload: JwtPayload = {
+    const jwtPayload: JwtPayload = {
       id: user.id,
       username: user.username,
     };
 
-    return this.jwtService.signAsync(payload);
+    return this.jwtService.signAsync(jwtPayload);
   }
 }
