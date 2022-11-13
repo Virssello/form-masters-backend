@@ -7,7 +7,7 @@ export class UserService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getOneUser(id: number): Promise<User> {
-    console.log('GET user with id ' + id);
+    console.log('GET user succesfull');
     return this.prismaService.user.findUnique({ where: { id: id } });
   }
 }

@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const Pancakes = await prisma.receipe.upsert({
+  const Pancakes = await prisma.recipe.upsert({
     where: { id: 1 },
     update: {},
     create: {
@@ -17,7 +17,7 @@ async function main() {
       description: 'Mix all and put on frying pan',
     },
   });
-  const Sandwiches = await prisma.receipe.upsert({
+  const Sandwiches = await prisma.recipe.upsert({
     where: { id: 2 },
     update: {},
     create: {
@@ -31,7 +31,7 @@ async function main() {
       description: 'Cut the bread, put on bread some butter and ham',
     },
   });
-  const Spaghetti = await prisma.receipe.upsert({
+  const Spaghetti = await prisma.recipe.upsert({
     where: { id: 3 },
     update: {},
     create: {
@@ -46,7 +46,7 @@ async function main() {
         'Boil the water for noodles, put them inside, put chicken and tomatoes on frying pan, mix all',
     },
   });
-  const Cake = await prisma.receipe.upsert({
+  const Cake = await prisma.recipe.upsert({
     where: { id: 4 },
     update: {},
     create: {
@@ -61,7 +61,7 @@ async function main() {
     },
   });
 
-  const Soup = await prisma.receipe.upsert({
+  const Soup = await prisma.recipe.upsert({
     where: { id: 5 },
     update: {},
     create: {
@@ -76,7 +76,7 @@ async function main() {
     },
   });
 
-  const OatsWithMilk = await prisma.receipe.upsert({
+  const OatsWithMilk = await prisma.recipe.upsert({
     where: { id: 6 },
     update: {},
     create: {
