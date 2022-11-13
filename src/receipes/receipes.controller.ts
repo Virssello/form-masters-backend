@@ -1,34 +1,21 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { ReceipesService } from './receipes.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('receipes')
 @Controller('receipes')
 export class ReceipesController {
   constructor(private readonly receipesService: ReceipesService) {}
 
   @Get()
-  findAll() {
+  findAllReceipes() {
+    console.log('All receipes fetched');
     return this.receipesService.getAllReceipes();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOneReceipeById(@Param('id') id: string) {
+    console.log('One receipe fetched with id: ' + id);
     return this.receipesService.getOneReceipe(+id);
   }
-
-  /*  @Post()
-  create(@Body() createReceipeDto: CreateReceipeDto) {
-    return this.receipesService.create(createReceipeDto);
-  }*/
-
-  /*
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReceipeDto: UpdateReceipeDto) {
-    return this.receipesService.update(+id, updateReceipeDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.receipesService.remove(+id);
-  }*/
 }

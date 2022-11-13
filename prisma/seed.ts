@@ -13,7 +13,7 @@ async function main() {
       calories: 300,
       photo:
         'https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2019/08/1066536-v-1500x1500.jpg',
-      ingredients: 'milk, eggs, wheat oat, oil',
+      ingredients: ['milk', 'eggs', 'wheat oat', 'oil'],
       description: 'Mix all and put on frying pan',
     },
   });
@@ -27,7 +27,7 @@ async function main() {
       calories: 400,
       photo:
         'https://akademiasmaku.pl/upload/recipes/1136/kanapki-pielgrzyma-1136.jpg',
-      ingredients: 'bread, ham, butter',
+      ingredients: ['bread', 'ham', 'butter'],
       description: 'Cut the bread, put on bread some butter and ham',
     },
   });
@@ -41,7 +41,7 @@ async function main() {
       calories: 500,
       photo:
         'https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/spaghetti_bolognese_01.jpg',
-      ingredients: 'noodles, chicken, tomatoes',
+      ingredients: ['noodles', 'chicken', 'tomatoes'],
       description:
         'Boil the water for noodles, put them inside, put chicken and tomatoes on frying pan, mix all',
     },
@@ -56,7 +56,7 @@ async function main() {
       calories: 600,
       photo:
         'https://staticsmaker.iplsc.com/smaker_production_2022_04_22/6e1a433da66fa7a6f423122caa5eb1e9-content.jpg',
-      ingredients: 'milk, eggs, wheat oat, oil',
+      ingredients: ['milk', 'eggs', 'wheat oat', 'oil'],
       description: 'Mix all and put to oven',
     },
   });
@@ -71,7 +71,7 @@ async function main() {
       calories: 700,
       photo:
         'https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/zupa-meksykanska-z-batatami-kurczakiem-soczewica-00.jpg',
-      ingredients: 'chicken, carrot, potatoes, onion',
+      ingredients: ['chicken', 'carrot', 'potatoes', 'onion'],
       description: 'Cut everything and put it to the boiling water',
     },
   });
@@ -86,8 +86,8 @@ async function main() {
       calories: 800,
       photo:
         'https://polki.pl/foto/4_3_LARGE/platki-sniadaniowe-i-mleko-niebianskie-polaczenie-2228265.jpg',
-      ingredients: 'milk, oats',
-      description: 'Mix all',
+      ingredients: ['milk', 'oats'],
+      description: 'Cut everything and put it to the boiling water',
     },
   });
 }
