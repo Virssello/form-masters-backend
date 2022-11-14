@@ -8,6 +8,7 @@ import { AppController } from './app.controller';
 import { RecipesModule } from './recipe/recipes.module';
 import { MeasurementsModule } from './measurements/measurements.module';
 import { ProductUsersModule } from './product-users/product-users.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ProductUsersModule } from './product-users/product-users.module';
     RecipesModule,
     MeasurementsModule,
     ProductUsersModule,
+    ProductsModule,
   ],
   providers: [
     {
