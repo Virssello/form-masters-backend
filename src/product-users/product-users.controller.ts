@@ -19,7 +19,7 @@ export class ProductUsersController {
   @ApiBadRequestResponse({
     description: 'ProductUsers has not been fetched',
   })
-  @Get(':id/product-users')
+  @Get(':id')
   findManyProductUsers(@Param('id') id: number) {
     return this.productUsersService.getProductUsers(+id);
   }

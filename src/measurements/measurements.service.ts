@@ -9,7 +9,19 @@ export class MeasurementsService {
 
   async getOneMeasurement(id: number): Promise<Measurement> {
     console.log('GET measurement successful');
-    return this.prismaService.measurement.findUnique({ where: { id: id } });
+    return this.prismaService.measurement.findUnique({
+      where: { id: id },
+    });
+  }
+
+  async getUserMeasurements(id: number): Promise<Measurement[]> {
+    const measurement = this.prismaService.measurement.findMany({
+      where: {
+        userId: id,
+      },
+    });
+    console.log('GET userMeasurement successful');
+    return measurement;
   }
 
   async createMeasurement(
