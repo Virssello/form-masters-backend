@@ -20,4 +20,20 @@ export class SignupRequest {
   @IsNotEmpty()
   @MinLength(8)
   password: string;
+
+  @ApiProperty({
+    description: 'Sex - male/female',
+    example: 'male',
+  })
+  @IsNotEmpty()
+  @MinLength(8)
+  sex: string;
+
+  @ApiProperty({
+    description: 'Age',
+    example: 18,
+  })
+  @IsNotEmpty()
+  @MinLength(8)
+  age: number;
 }
