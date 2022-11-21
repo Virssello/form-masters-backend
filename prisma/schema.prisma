@@ -31,7 +31,6 @@ model ProductUsers {
   productId Int
 }
 
-
 model Recipe {
   id          Int    @id @default(autoincrement())
   name        String
@@ -64,6 +63,8 @@ model User {
   id        Int    @id @default(autoincrement())
   username  String
   password  String
+  sex       String
+  age       Int
   measurements Measurement[]
   products    ProductUsers[]
   workout   Workout[]
