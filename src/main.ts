@@ -10,6 +10,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
 
   // Request Validation
+  app.setGlobalPrefix('/api');
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
   app.use(requestIp.mw());
@@ -21,7 +22,7 @@ async function bootstrap() {
   const options = new DocumentBuilder()
     .setTitle('form-masters-api')
     .setDescription('form-masters-api')
-    .setVersion('0.1.0')
+    .setVersion('0.0.1')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
