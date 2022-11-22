@@ -7,8 +7,6 @@ export class SignupRequest {
     example: 'username',
   })
   @IsNotEmpty()
-  // alphanumeric characters and - are valid
-  // you can change this as you like
   @Matches(RegExp('^[a-zA-Z0-9\\-]+$'))
   @MaxLength(20)
   username: string;
@@ -22,18 +20,22 @@ export class SignupRequest {
   password: string;
 
   @ApiProperty({
-    description: 'Sex - male/female',
+    description: 'Gender - male/female',
     example: 'male',
   })
   @IsNotEmpty()
-  @MinLength(8)
-  sex: string;
+  gender: string;
 
   @ApiProperty({
     description: 'Age',
     example: 18,
   })
   @IsNotEmpty()
-  @MinLength(8)
   age: number;
+
+  @ApiProperty({
+    description: 'Calories',
+    example: 0,
+  })
+  calories: number;
 }

@@ -63,8 +63,9 @@ model User {
   id        Int    @id @default(autoincrement())
   username  String
   password  String
-  sex       String
+  gender    String
   age       Int
+  calories  Int?
   measurements Measurement[]
   products    ProductUsers[]
   workout   Workout[]

@@ -26,7 +26,7 @@ export class AuthService {
         data: {
           username: signupRequest.username.toLowerCase(),
           password: await bcrypt.hash(signupRequest.password, 10),
-          sex: signupRequest.sex.toLowerCase(),
+          gender: signupRequest.gender.toLowerCase(),
           age: signupRequest.age,
         },
         select: null,

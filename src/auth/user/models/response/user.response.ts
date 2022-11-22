@@ -4,14 +4,16 @@ export class UserResponse {
   id: number;
   username: string;
   age: number;
-  sex: string;
+  gender: string;
+  calories: number;
 
   static fromUserEntity(entity: User): UserResponse {
     const response = new UserResponse();
     response.id = entity.id;
     response.username = entity.username;
     response.age = entity.age;
-    response.sex = entity.sex;
+    response.gender = entity.gender;
+    response.calories = entity.calories;
     return response;
   }
 }
