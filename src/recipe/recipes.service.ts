@@ -7,12 +7,12 @@ export class RecipesService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getAllRecipes(): Promise<Recipe[]> {
-    console.log('GET all receipes');
+    console.log('GET all recipes');
     return this.prismaService.recipe.findMany();
   }
 
   async getOneRecipe(id: number): Promise<Recipe> {
-    console.log('GET receipe with id ' + id);
+    console.log('GET recipe with id ' + id);
     return this.prismaService.recipe.findUnique({ where: { id: id } });
   }
 }

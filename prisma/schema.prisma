@@ -65,7 +65,10 @@ model User {
   password  String
   gender    String
   age       Int
-  calories  Int?
+  height    Int
+  goal      String
+  lifestyle String
+  calories  Float?
   measurements Measurement[]
   products    ProductUsers[]
   workout   Workout[]

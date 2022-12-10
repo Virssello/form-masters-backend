@@ -1,6 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
+import { UpdateUserCaloriesRequest } from './request/update-user-calories.request';
 
 @ApiTags('users')
 @Controller('users')
@@ -11,5 +12,13 @@ export class UserController {
   findOneUserById(@Param('id') id: number) {
     console.log('One user fetched with id: ' + id);
     return this.userService.getOneUser(+id);
+  }
+
+  @Put('update-calories')
+  updateUserCaloriesById(
+    @Body() updateUserCalories: UpdateUserCaloriesRequest,
+  ) {
+    console.log('User calories updated');
+    return this.userService.updateUserCalories(updateUserCalories);
   }
 }

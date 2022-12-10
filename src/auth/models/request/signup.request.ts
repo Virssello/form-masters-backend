@@ -34,6 +34,27 @@ export class SignupRequest {
   age: number;
 
   @ApiProperty({
+    description: 'Height',
+    example: 180,
+  })
+  @IsNotEmpty()
+  height: number;
+
+  @ApiProperty({
+    description: 'Goal',
+    example: 'Lose',
+  })
+  @IsNotEmpty()
+  goal: string;
+
+  @ApiProperty({
+    description: 'Lifestyle',
+    example: 'Lightly Active',
+  })
+  @IsNotEmpty()
+  lifestyle: string;
+
+  @ApiProperty({
     description: 'Calories',
     example: 0,
   })

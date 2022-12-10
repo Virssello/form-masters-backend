@@ -28,6 +28,9 @@ export class AuthService {
           password: await bcrypt.hash(signupRequest.password, 10),
           gender: signupRequest.gender.toLowerCase(),
           age: signupRequest.age,
+          height: signupRequest.height,
+          goal: signupRequest.goal,
+          lifestyle: signupRequest.lifestyle,
         },
         select: null,
       });
