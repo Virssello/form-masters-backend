@@ -12,6 +12,11 @@ export class WorkoutsService {
     return this.prismaService.workout.findMany({ where: { userId: null } });
   }
 
+  async getAllUserWorkouts(id: number): Promise<Workout[]> {
+    console.log('GET all user workouts');
+    return this.prismaService.workout.findMany({ where: { userId: id } });
+  }
+
   async getOneWorkout(id: number): Promise<Workout> {
     console.log('GET workout with id ' + id);
     return this.prismaService.workout.findUnique({ where: { id: id } });

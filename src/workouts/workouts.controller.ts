@@ -18,8 +18,14 @@ export class WorkoutsController {
     return this.workoutsService.getAllWorkouts();
   }
 
+  @Get('/user/:id')
+  findAllUserWorkouts(@Param('id') id: number) {
+    console.log('All user ' + id + ' workouts fetched');
+    return this.workoutsService.getAllUserWorkouts(+id);
+  }
+
   @Get(':id')
-  findOneRecipeById(@Param('id') id: string) {
+  findOneWorkoutById(@Param('id') id: number) {
     console.log('One workout fetched with id: ' + id);
     return this.workoutsService.getOneWorkout(+id);
   }
