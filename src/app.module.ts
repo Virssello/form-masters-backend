@@ -9,6 +9,7 @@ import { RecipesModule } from './recipe/recipes.module';
 import { MeasurementsModule } from './measurements/measurements.module';
 import { ProductUsersModule } from './product-users/product-users.module';
 import { ProductsModule } from './products/products.module';
+import { WorkoutsModule } from './workouts/workouts.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ProductsModule } from './products/products.module';
     AuthModule,
     UserModule,
     RecipesModule,
+    WorkoutsModule,
     MeasurementsModule,
     ProductUsersModule,
     ProductsModule,

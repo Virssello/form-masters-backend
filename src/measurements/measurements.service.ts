@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../common/services/prisma/prisma.service';
 import { Measurement } from '@prisma/client';
 import { CreateMeasurementRequest } from './request/create-measurement.request';
+import { DeleteMeasurementRequest } from './request/delete-measurement.request';
 
 @Injectable()
 export class MeasurementsService {
@@ -31,7 +32,7 @@ export class MeasurementsService {
       createMeasurementRequest;
     const measurement = this.prismaService.measurement.create({
       data: {
-        userId: userId,
+        userId,
         weight,
         neck,
         chest,
@@ -43,6 +44,16 @@ export class MeasurementsService {
       },
     });
     console.log('POST measurement successful');
+    return measurement;
+  }
+
+  deleteMeasurement(
+    deleteMeasurementRequest: DeleteMeasurementRequest,
+  ): Promise<Measurement> {
+    const measurement = this.prismaService.measurement.delete({
+      where: { id: deleteMeasurementRequest.id },
+    });
+    console.log('DELETE measurement successful');
     return measurement;
   }
 }
