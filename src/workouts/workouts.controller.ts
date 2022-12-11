@@ -17,6 +17,7 @@ export class WorkoutsController {
     console.log('All workouts fetched');
     return this.workoutsService.getAllWorkouts();
   }
+  id;
 
   @Get('/user/:id')
   findAllUserWorkouts(@Param('id') id: number) {

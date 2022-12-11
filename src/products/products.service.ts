@@ -6,12 +6,16 @@ import { PrismaService } from '../common/services/prisma/prisma.service';
 export class ProductsService {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async getAllProducts(): Promise<Product[]> {
+    console.log('GET all products');
+    return this.prismaService.product.findMany();
+  }
   async getOneProduct(id: number): Promise<Product> {
     console.log('GET product successful');
     return this.prismaService.product.findUnique({ where: { id: id } });
   }
 
-  async getManyProducstUser(id: number): Promise<Product[]> {
+  async getManyProductsUser(id: number): Promise<Product[]> {
     const productNames = this.prismaService.product.findMany({
       where: {
         users: {

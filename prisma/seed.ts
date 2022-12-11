@@ -160,6 +160,45 @@ async function main() {
       exercises: ['lying leg curl', 'barbell press'],
     },
   });
+
+  const Milk = await prisma.product.upsert({
+    where: { id: 14 },
+    update: {},
+    create: {
+      id: 10001,
+      name: 'Milk',
+      calories: 100,
+      protein: 10,
+      carbohydrate: 5,
+      fat: 2,
+    },
+  });
+
+  const Ham = await prisma.product.upsert({
+    where: { id: 14 },
+    update: {},
+    create: {
+      id: 10002,
+      name: 'Ham',
+      calories: 80,
+      protein: 20,
+      carbohydrate: 2,
+      fat: 20,
+    },
+  });
+
+  const Tomato = await prisma.product.upsert({
+    where: { id: 15 },
+    update: {},
+    create: {
+      id: 10003,
+      name: 'Tomato',
+      calories: 30,
+      protein: 2,
+      carbohydrate: 10,
+      fat: 1,
+    },
+  });
 }
 
 main()

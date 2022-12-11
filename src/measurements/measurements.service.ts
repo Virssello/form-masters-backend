@@ -20,6 +20,9 @@ export class MeasurementsService {
       where: {
         userId: id,
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
     console.log('GET userMeasurement successful');
     return measurement;
