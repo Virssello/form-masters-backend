@@ -34,4 +34,15 @@ export class ProductUsersController {
   addMeasurement(@Body() createProductUsersRequest: CreateProductUsersRequest) {
     this.productUsersService.createProductUsers(createProductUsersRequest);
   }
+
+  @ApiOkResponse({
+    description: 'ProductUsers has been fetched',
+  })
+  @ApiBadRequestResponse({
+    description: 'ProductUsers has not been fetched',
+  })
+  @Get('/details/:id')
+  findManyProductUsersDetails(@Param('id') id: number) {
+    return this.productUsersService.getProductUsersDetails(+id);
+  }
 }

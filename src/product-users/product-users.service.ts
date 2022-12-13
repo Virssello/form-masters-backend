@@ -30,4 +30,18 @@ export class ProductUsersService {
     console.log('GET productUsers successful');
     return productUsers;
   }
+
+  //TODO FINISH CURRENT DATE SEARCH
+  async getProductUsersDetails(id: number): Promise<ProductUsers[]> {
+    const productUsers = this.prismaService.productUsers.findMany({
+      where: {
+        userId: id,
+      },
+      include: {
+        product: true,
+      },
+    });
+    console.log('GET productUsers successful');
+    return productUsers;
+  }
 }
