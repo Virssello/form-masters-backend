@@ -15,4 +15,11 @@ export class CreateProductUsersRequest {
   })
   @IsNotEmpty()
   userId: number;
+
+  @ApiProperty({
+    description: 'weight',
+    example: 1,
+  })
+  @IsNotEmpty()
+  weight: number;
 }

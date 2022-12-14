@@ -10,28 +10,18 @@ export class ProductUsersService {
   async createProductUsers(
     createProductUsersRequest: CreateProductUsersRequest,
   ): Promise<ProductUsers> {
-    const { userId, productId } = createProductUsersRequest;
+    const { userId, productId, weight } = createProductUsersRequest;
     const productUsers = this.prismaService.productUsers.create({
       data: {
         userId: userId,
         productId: productId,
+        weight: weight,
       },
     });
     console.log('POST productUsers successful');
     return productUsers;
   }
 
-  async getProductUsers(id: number): Promise<ProductUsers[]> {
-    const productUsers = this.prismaService.productUsers.findMany({
-      where: {
-        userId: id,
-      },
-    });
-    console.log('GET productUsers successful');
-    return productUsers;
-  }
-
-  //TODO FINISH CURRENT DATE SEARCH
   async getProductUsersDetails(id: number): Promise<ProductUsers[]> {
     const productUsers = this.prismaService.productUsers.findMany({
       where: {

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ProductUsersService } from './product-users.service';
 import {
   ApiBadRequestResponse,
@@ -13,17 +13,6 @@ import { CreateProductUsersRequest } from './request/create-product-users.reques
 export class ProductUsersController {
   constructor(private readonly productUsersService: ProductUsersService) {}
 
-  @ApiOkResponse({
-    description: 'ProductUsers has been fetched',
-  })
-  @ApiBadRequestResponse({
-    description: 'ProductUsers has not been fetched',
-  })
-  @Get(':id')
-  findManyProductUsers(@Param('id') id: number) {
-    return this.productUsersService.getProductUsers(+id);
-  }
-
   @ApiCreatedResponse({
     description: 'ProductUsers has been created',
   })
@@ -36,10 +25,10 @@ export class ProductUsersController {
   }
 
   @ApiOkResponse({
-    description: 'ProductUsers has been fetched',
+    description: 'ProductUsersDetails has been fetched',
   })
   @ApiBadRequestResponse({
-    description: 'ProductUsers has not been fetched',
+    description: 'ProductUsersDetails  has not been fetched',
   })
   @Get('/details/:id')
   findManyProductUsersDetails(@Param('id') id: number) {

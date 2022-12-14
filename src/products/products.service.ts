@@ -8,7 +8,9 @@ export class ProductsService {
 
   async getAllProducts(): Promise<Product[]> {
     console.log('GET all products');
-    return this.prismaService.product.findMany();
+    return this.prismaService.product.findMany({
+      orderBy: { name: 'asc' },
+    });
   }
   async getOneProduct(id: number): Promise<Product> {
     console.log('GET product successful');
