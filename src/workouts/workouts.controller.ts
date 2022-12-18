@@ -8,6 +8,7 @@ import {
 } from '@nestjs/swagger';
 import { CreateWorkoutRequest } from './request/create-workout.request';
 import { ArchiveWorkoutRequest } from './request/archive-workout.request';
+import { EditWorkoutRequest } from './request/edit-workout.request';
 
 @ApiTags('workouts')
 @Controller('workouts')
@@ -50,7 +51,18 @@ export class WorkoutsController {
     description: 'Workout has not been archived',
   })
   @Put('/archive-workout')
-  archiveWorkout(@Body() deleteWorkoutRequest: ArchiveWorkoutRequest) {
-    return this.workoutsService.archiveWorkout(deleteWorkoutRequest);
+  archiveWorkout(@Body() archiveWorkoutRequest: ArchiveWorkoutRequest) {
+    return this.workoutsService.archiveWorkout(archiveWorkoutRequest);
+  }
+
+  @ApiOkResponse({
+    description: 'Workout has been edited',
+  })
+  @ApiBadRequestResponse({
+    description: 'Workout has not been edited',
+  })
+  @Put('/edit-workout')
+  editWorkout(@Body() editWorkoutRequest: EditWorkoutRequest) {
+    return this.workoutsService.editWorkout(editWorkoutRequest);
   }
 }

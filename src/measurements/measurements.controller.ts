@@ -10,6 +10,7 @@ import {
 import { CreateMeasurementRequest } from './request/create-measurement.request';
 import { Measurement } from '@prisma/client';
 import { ArchiveMeasurementRequest } from './request/archive-measurement.request';
+import { EditMeasurementRequest } from './request/edit-measurement.request';
 
 @ApiTags('measurements')
 @Controller('measurements')
@@ -46,17 +47,28 @@ export class MeasurementsController {
   }
 
   @ApiOkResponse({
-    description: 'Measurement has been deleted',
+    description: 'Measurement has been archived',
   })
   @ApiBadRequestResponse({
-    description: 'Measurement has not been deleted',
+    description: 'Measurement has not been archived',
   })
   @Put('/archive-measurement')
-  deleteMeasurement(
+  archiveMeasurement(
     @Body() archiveMeasurementRequest: ArchiveMeasurementRequest,
   ) {
     return this.measurementsService.archiveMeasurement(
       archiveMeasurementRequest,
     );
+  }
+
+  @ApiOkResponse({
+    description: 'Measurement has edited',
+  })
+  @ApiBadRequestResponse({
+    description: 'Measurement has not been edited',
+  })
+  @Put('/edit-measurement')
+  editMeasurement(@Body() editMeasurementRequest: EditMeasurementRequest) {
+    return this.measurementsService.editMeasurement(editMeasurementRequest);
   }
 }

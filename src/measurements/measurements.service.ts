@@ -3,6 +3,7 @@ import { PrismaService } from '../common/services/prisma/prisma.service';
 import { Measurement } from '@prisma/client';
 import { CreateMeasurementRequest } from './request/create-measurement.request';
 import { ArchiveMeasurementRequest } from './request/archive-measurement.request';
+import { EditMeasurementRequest } from './request/edit-measurement.request';
 
 @Injectable()
 export class MeasurementsService {
@@ -63,6 +64,30 @@ export class MeasurementsService {
       },
     });
     console.log('UPDATE-ARCHIVE Measurement successful');
+    return measurement;
+  }
+
+  async editMeasurement(
+    editMeasurementRequest: EditMeasurementRequest,
+  ): Promise<Measurement> {
+    const { id, weight, neck, chest, stomach, hips, biceps, calf, waist } =
+      editMeasurementRequest;
+    const measurement = this.prismaService.measurement.update({
+      where: {
+        id: editMeasurementRequest.id,
+      },
+      data: {
+        weight: editMeasurementRequest.weight,
+        neck: editMeasurementRequest.neck,
+        chest: editMeasurementRequest.chest,
+        stomach: editMeasurementRequest.stomach,
+        hips: editMeasurementRequest.hips,
+        biceps: editMeasurementRequest.biceps,
+        calf: editMeasurementRequest.calf,
+        waist: editMeasurementRequest.waist,
+      },
+    });
+    console.log('UPDATE Measurement successful');
     return measurement;
   }
 }

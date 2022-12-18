@@ -3,6 +3,7 @@ import { PrismaService } from '../common/services/prisma/prisma.service';
 import { Workout } from '@prisma/client';
 import { CreateWorkoutRequest } from './request/create-workout.request';
 import { ArchiveWorkoutRequest } from './request/archive-workout.request';
+import { EditWorkoutRequest } from './request/edit-workout.request';
 
 @Injectable()
 export class WorkoutsService {
@@ -51,6 +52,21 @@ export class WorkoutsService {
       },
     });
     console.log('UPDATE-ARCHIVE Workout successful');
+    return workout;
+  }
+
+  async editWorkout(editWorkoutRequest: EditWorkoutRequest): Promise<Workout> {
+    const { id, name, exercises } = editWorkoutRequest;
+    const workout = this.prismaService.workout.update({
+      where: {
+        id: editWorkoutRequest.id,
+      },
+      data: {
+        name: editWorkoutRequest.name,
+        exercises: editWorkoutRequest.exercises,
+      },
+    });
+    console.log('UPDATE Workout successful');
     return workout;
   }
 }
