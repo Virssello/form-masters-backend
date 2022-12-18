@@ -9,7 +9,8 @@ datasource db {
 
 model Measurement {
   id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
+  createdOn DateTime @default(now())
+  archivedOn DateTime?
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
   weight    Int
@@ -24,12 +25,13 @@ model Measurement {
 
 model ProductUsers {
   id          Int    @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  weight    Float
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  product   Product  @relation(fields: [productId], references: [id])
-  productId Int
+  createdOn  DateTime @default(now())
+  archivedOn DateTime?
+  weight     Float
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  Int
 }
 
 model Recipe {
@@ -57,6 +59,8 @@ model Workout {
   userId     Int?
   user       User?     @relation(fields: [userId], references: [id])
   name       String
+  createdOn  DateTime @default(now())
+  archivedOn DateTime?
   exercises String[]
 }
 

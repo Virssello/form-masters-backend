@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../common/services/prisma/prisma.service';
 import { Measurement } from '@prisma/client';
 import { CreateMeasurementRequest } from './request/create-measurement.request';
-import { DeleteMeasurementRequest } from './request/delete-measurement.request';
+import { ArchiveMeasurementRequest } from './request/archive-measurement.request';
 
 @Injectable()
 export class MeasurementsService {
@@ -21,7 +21,7 @@ export class MeasurementsService {
         userId: id,
       },
       orderBy: {
-        createdAt: 'desc',
+        createdOn: 'desc',
       },
     });
     console.log('GET userMeasurement successful');
@@ -50,13 +50,19 @@ export class MeasurementsService {
     return measurement;
   }
 
-  deleteMeasurement(
-    deleteMeasurementRequest: DeleteMeasurementRequest,
+  async archiveMeasurement(
+    archiveMeasurementRequest: ArchiveMeasurementRequest,
   ): Promise<Measurement> {
-    const measurement = this.prismaService.measurement.delete({
-      where: { id: deleteMeasurementRequest.id },
+    const { id, archivedOn } = archiveMeasurementRequest;
+    const measurement = this.prismaService.measurement.update({
+      where: {
+        id: archiveMeasurementRequest.id,
+      },
+      data: {
+        archivedOn: archiveMeasurementRequest.archivedOn,
+      },
     });
-    console.log('DELETE measurement successful');
+    console.log('UPDATE-ARCHIVE Measurement successful');
     return measurement;
   }
 }

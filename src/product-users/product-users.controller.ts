@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { ProductUsersService } from './product-users.service';
 import {
   ApiBadRequestResponse,
@@ -7,6 +7,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { CreateProductUsersRequest } from './request/create-product-users.request';
+import { ArchiveProductUsersRequest } from './request/archive-product-users.request';
 
 @ApiTags('product-users')
 @Controller('product-users')
@@ -33,5 +34,20 @@ export class ProductUsersController {
   @Get('/details/:id')
   findManyProductUsersDetails(@Param('id') id: number) {
     return this.productUsersService.getProductUsersDetails(+id);
+  }
+
+  @ApiOkResponse({
+    description: 'ProductUsersDetails has been deleted',
+  })
+  @ApiBadRequestResponse({
+    description: 'ProductUsersDetails  has not been deleted',
+  })
+  @Put('/archive-product-users')
+  archiveProductUsers(
+    @Body() deleteProductUsersRequest: ArchiveProductUsersRequest,
+  ) {
+    return this.productUsersService.archiveProductUsers(
+      deleteProductUsersRequest,
+    );
   }
 }

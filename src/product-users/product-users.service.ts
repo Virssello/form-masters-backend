@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../common/services/prisma/prisma.service';
 import { CreateProductUsersRequest } from './request/create-product-users.request';
 import { ProductUsers } from '@prisma/client';
+import { ArchiveProductUsersRequest } from './request/archive-product-users.request';
 
 @Injectable()
 export class ProductUsersService {
@@ -32,6 +33,22 @@ export class ProductUsersService {
       },
     });
     console.log('GET productUsers successful');
+    return productUsers;
+  }
+
+  async archiveProductUsers(
+    archiveProductUsersRequest: ArchiveProductUsersRequest,
+  ): Promise<ProductUsers> {
+    const { id, archivedOn } = archiveProductUsersRequest;
+    const productUsers = this.prismaService.productUsers.update({
+      where: {
+        id: archiveProductUsersRequest.id,
+      },
+      data: {
+        archivedOn: archiveProductUsersRequest.archivedOn,
+      },
+    });
+    console.log('UPDATE-ARCHIVE productUsers successful');
     return productUsers;
   }
 }

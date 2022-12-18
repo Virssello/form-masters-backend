@@ -1,14 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { MeasurementsService } from './measurements.service';
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
+  ApiOkResponse,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { CreateMeasurementRequest } from './request/create-measurement.request';
 import { Measurement } from '@prisma/client';
-import { DeleteMeasurementRequest } from './request/delete-measurement.request';
+import { ArchiveMeasurementRequest } from './request/archive-measurement.request';
 
 @ApiTags('measurements')
 @Controller('measurements')
@@ -44,11 +45,18 @@ export class MeasurementsController {
     this.measurementsService.createMeasurement(createMeasurementRequest);
   }
 
-  //TODO FIX
-  @Delete('/delete-measurement')
-  removeMeasurement(
-    @Body() deleteMeasurementRequest: DeleteMeasurementRequest,
+  @ApiOkResponse({
+    description: 'Measurement has been deleted',
+  })
+  @ApiBadRequestResponse({
+    description: 'Measurement has not been deleted',
+  })
+  @Put('/archive-measurement')
+  deleteMeasurement(
+    @Body() archiveMeasurementRequest: ArchiveMeasurementRequest,
   ) {
-    this.measurementsService.deleteMeasurement(deleteMeasurementRequest);
+    return this.measurementsService.archiveMeasurement(
+      archiveMeasurementRequest,
+    );
   }
 }

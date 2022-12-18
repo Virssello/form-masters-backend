@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../common/services/prisma/prisma.service';
 import { Workout } from '@prisma/client';
 import { CreateWorkoutRequest } from './request/create-workout.request';
+import { ArchiveWorkoutRequest } from './request/archive-workout.request';
 
 @Injectable()
 export class WorkoutsService {
@@ -34,6 +35,22 @@ export class WorkoutsService {
         exercises,
       },
     });
+    return workout;
+  }
+
+  async archiveWorkout(
+    archiveWorkoutRequest: ArchiveWorkoutRequest,
+  ): Promise<Workout> {
+    const { id, archivedOn } = archiveWorkoutRequest;
+    const workout = this.prismaService.workout.update({
+      where: {
+        id: archiveWorkoutRequest.id,
+      },
+      data: {
+        archivedOn: archiveWorkoutRequest.archivedOn,
+      },
+    });
+    console.log('UPDATE-ARCHIVE Workout successful');
     return workout;
   }
 }
