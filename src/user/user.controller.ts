@@ -9,13 +9,13 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get(':id')
-  findOneUserById(@Param('id') id: number) {
+  async findOneUserById(@Param('id') id: number) {
     console.log('One user fetched with id: ' + id);
     return this.userService.getOneUser(+id);
   }
 
   @Put('update-calories')
-  updateUserCaloriesById(
+  async updateUserCaloriesById(
     @Body() updateUserCalories: UpdateUserCaloriesRequest,
   ) {
     console.log('User calories updated');

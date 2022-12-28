@@ -16,19 +16,19 @@ export class WorkoutsController {
   constructor(private readonly workoutsService: WorkoutsService) {}
 
   @Get()
-  findAllWorkouts() {
+  async findAllWorkouts() {
     console.log('All workouts fetched');
     return this.workoutsService.getAllWorkouts();
   }
 
   @Get('/user/:id')
-  findAllUserWorkouts(@Param('id') id: number) {
+  async findAllUserWorkouts(@Param('id') id: number) {
     console.log('All user ' + id + ' workouts fetched');
     return this.workoutsService.getAllUserWorkouts(+id);
   }
 
   @Get(':id')
-  findOneWorkoutById(@Param('id') id: number) {
+  async findOneWorkoutById(@Param('id') id: number) {
     console.log('One workout fetched with id: ' + id);
     return this.workoutsService.getOneWorkout(+id);
   }
@@ -40,7 +40,7 @@ export class WorkoutsController {
     description: 'Workout has not been created',
   })
   @Post('/create-workout')
-  addMeasurement(@Body() createWorkoutRequest: CreateWorkoutRequest) {
+  async addMeasurement(@Body() createWorkoutRequest: CreateWorkoutRequest) {
     this.workoutsService.createWorkout(createWorkoutRequest);
   }
 
@@ -51,7 +51,7 @@ export class WorkoutsController {
     description: 'Workout has not been archived',
   })
   @Put('/archive-workout')
-  archiveWorkout(@Body() archiveWorkoutRequest: ArchiveWorkoutRequest) {
+  async archiveWorkout(@Body() archiveWorkoutRequest: ArchiveWorkoutRequest) {
     return this.workoutsService.archiveWorkout(archiveWorkoutRequest);
   }
 
@@ -62,7 +62,7 @@ export class WorkoutsController {
     description: 'Workout has not been edited',
   })
   @Put('/edit-workout')
-  editWorkout(@Body() editWorkoutRequest: EditWorkoutRequest) {
+  async editWorkout(@Body() editWorkoutRequest: EditWorkoutRequest) {
     return this.workoutsService.editWorkout(editWorkoutRequest);
   }
 }

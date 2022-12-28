@@ -32,7 +32,7 @@ export class ProductUsersController {
     description: 'ProductUsersDetails  has not been fetched',
   })
   @Get('/details/:id')
-  findManyProductUsersDetails(@Param('id') id: number) {
+  async findManyProductUsersDetails(@Param('id') id: number) {
     return this.productUsersService.getProductUsersDetails(+id);
   }
 
@@ -43,7 +43,7 @@ export class ProductUsersController {
     description: 'ProductUsersDetails  has not been deleted',
   })
   @Put('/archive-product-users')
-  archiveProductUsers(
+  async archiveProductUsers(
     @Body() deleteProductUsersRequest: ArchiveProductUsersRequest,
   ) {
     return this.productUsersService.archiveProductUsers(

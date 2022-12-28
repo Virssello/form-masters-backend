@@ -21,7 +21,7 @@ export class MeasurementsController {
     description: 'Measurement',
   })
   @Get(':id')
-  findOneMeasurementById(@Param('id') id: number) {
+  async findOneMeasurementById(@Param('id') id: number) {
     console.log('One measurement fetched with id: ' + id);
     return this.measurementsService.getOneMeasurement(+id);
   }
@@ -30,7 +30,7 @@ export class MeasurementsController {
     description: 'User measurements',
   })
   @Get('user/:id')
-  findUserMeasurements(@Param('id') id: number): Promise<Measurement[]> {
+  async findUserMeasurements(@Param('id') id: number): Promise<Measurement[]> {
     console.log('User measurements fetched with userId ' + id);
     return this.measurementsService.getUserMeasurements(id);
   }
@@ -42,7 +42,9 @@ export class MeasurementsController {
     description: 'Measurement has not been created',
   })
   @Post('/create-measurement')
-  addMeasurement(@Body() createMeasurementRequest: CreateMeasurementRequest) {
+  async addMeasurement(
+    @Body() createMeasurementRequest: CreateMeasurementRequest,
+  ) {
     this.measurementsService.createMeasurement(createMeasurementRequest);
   }
 
@@ -53,7 +55,7 @@ export class MeasurementsController {
     description: 'Measurement has not been archived',
   })
   @Put('/archive-measurement')
-  archiveMeasurement(
+  async archiveMeasurement(
     @Body() archiveMeasurementRequest: ArchiveMeasurementRequest,
   ) {
     return this.measurementsService.archiveMeasurement(
@@ -68,7 +70,9 @@ export class MeasurementsController {
     description: 'Measurement has not been edited',
   })
   @Put('/edit-measurement')
-  editMeasurement(@Body() editMeasurementRequest: EditMeasurementRequest) {
+  async editMeasurement(
+    @Body() editMeasurementRequest: EditMeasurementRequest,
+  ) {
     return this.measurementsService.editMeasurement(editMeasurementRequest);
   }
 }
