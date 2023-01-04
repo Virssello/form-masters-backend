@@ -175,7 +175,7 @@ async function main() {
   });
 
   const Ham = await prisma.product.upsert({
-    where: { id: 14 },
+    where: { id: 15 },
     update: {},
     create: {
       id: 10002,
@@ -188,7 +188,7 @@ async function main() {
   });
 
   const Tomato = await prisma.product.upsert({
-    where: { id: 15 },
+    where: { id: 16 },
     update: {},
     create: {
       id: 10003,
@@ -197,6 +197,71 @@ async function main() {
       protein: 2,
       carbohydrate: 10,
       fat: 1,
+    },
+  });
+
+  const Chicken = await prisma.product.upsert({
+    where: { id: 17 },
+    update: {},
+    create: {
+      id: 10004,
+      name: 'Chicken',
+      calories: 100,
+      protein: 30,
+      carbohydrate: 2,
+      fat: 5,
+    },
+  });
+
+  const Potato = await prisma.product.upsert({
+    where: { id: 18 },
+    update: {},
+    create: {
+      id: 10005,
+      name: 'Potato',
+      calories: 80,
+      protein: 3,
+      carbohydrate: 15,
+      fat: 3,
+    },
+  });
+
+  const Cheese = await prisma.product.upsert({
+    where: { id: 19 },
+    update: {},
+    create: {
+      id: 10006,
+      name: 'Cheese',
+      calories: 200,
+      protein: 2,
+      carbohydrate: 10,
+      fat: 30,
+    },
+  });
+
+  const Oats = await prisma.product.upsert({
+    where: { id: 20 },
+    update: {},
+    create: {
+      id: 10007,
+      name: 'Oats',
+      calories: 180,
+      protein: 5,
+      carbohydrate: 30,
+      fat: 2,
+    },
+  });
+
+  const Bread = await prisma.product.upsert({
+    where: { id: 21 },
+    update: {},
+    create: {
+      id: 10008,
+      name: 'Bread',
+      calories: 150,
+      protein: 6,
+      carbohydrate: 23,
+      fat: 7,
     },
   });
 }
