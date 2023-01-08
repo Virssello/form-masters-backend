@@ -34,13 +34,12 @@ export class AuthService {
         },
         select: null,
       });
-    } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        if (e.code === 'P2002') {
-          // unique constraint
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === 'P2002') {
           throw new ConflictException();
-        } else throw e;
-      } else throw e;
+        } else throw error;
+      } else throw error;
     }
   }
 

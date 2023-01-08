@@ -21,7 +21,9 @@ export class ProductUsersController {
     description: 'ProductUsers has not been created',
   })
   @Post('/create-product-users')
-  addMeasurement(@Body() createProductUsersRequest: CreateProductUsersRequest) {
+  async addMeasurement(
+    @Body() createProductUsersRequest: CreateProductUsersRequest,
+  ) {
     this.productUsersService.createProductUsers(createProductUsersRequest);
   }
 
@@ -37,10 +39,10 @@ export class ProductUsersController {
   }
 
   @ApiOkResponse({
-    description: 'ProductUsersDetails has been deleted',
+    description: 'ProductUsersDetails has been archived',
   })
   @ApiBadRequestResponse({
-    description: 'ProductUsersDetails  has not been deleted',
+    description: 'ProductUsersDetails has not been archived',
   })
   @Put('/archive-product-users')
   async archiveProductUsers(

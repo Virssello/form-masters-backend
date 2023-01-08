@@ -42,10 +42,10 @@ export class ProductUsersService {
     const { id, archivedOn } = archiveProductUsersRequest;
     const productUsers = this.prismaService.productUsers.update({
       where: {
-        id: archiveProductUsersRequest.id,
+        id: id,
       },
       data: {
-        archivedOn: archiveProductUsersRequest.archivedOn,
+        archivedOn: archivedOn,
       },
     });
     console.log('UPDATE-ARCHIVE productUsers successful');
